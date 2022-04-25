@@ -161,11 +161,15 @@ class CoinGeckoAPI:
                             "to": to_timestamp}
         api_url: str = self.__genr_api_url(url, parameters)
         return self.__request(api_url)
-    
-    def get_coin_ohlc(self, id: str, vs_currency, days:str='max') -> list:
+
+    def get_coin_ohlc(self, id: str, vs_currency, days: str = 'max') -> list:
         """Get coin's OHLC"""
         url: str = f"/coins/{id}/ohlc"
         parameters: dict = {"vs_currency": vs_currency, "days": days}
         api_url: str = self.__genr_api_url(url, parameters)
         return self.__request(api_url)
-        
+
+    def get_coin_info_from_contract_address_by_id(self, id: str, contract_adrress: str):
+        url: str = f"/coins/{id}/contract/{contract_adrress}"
+        api_url: str = self.__genr_api_url(url)
+        return self.__request(api_url)
