@@ -1,1 +1,5 @@
 /venv
+/DataCollection/__pycache__/
+/CoinGeckoAPI/__pycache__/
+/__pycache__/
+*.pyc
