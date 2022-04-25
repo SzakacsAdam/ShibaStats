@@ -141,3 +141,12 @@ class CoinGeckoAPI:
         parameters: dict = {"date": date, "localization": localization}
         api_url: str = self.__genr_api_url(url, parameters)
         return self.__request(api_url)
+
+    def get_coin_market_chart(self, id: str, vs_currency, days='max', *,
+                              interval: str = "daily") -> dict:
+        """Get historical market data include price, market cap, and 24h volume (granularity auto)"""
+        url: str = f"/coins/{id}/market_chart"
+        parameters: dict = {"vs_currency": vs_currency, "days": days,
+                            "interval": interval}
+        api_url: str = self.__genr_api_url(url, parameters)
+        return self.__request(api_url)
