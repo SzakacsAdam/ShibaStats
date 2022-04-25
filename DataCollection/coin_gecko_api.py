@@ -232,8 +232,20 @@ class CoinGeckoAPI:
         api_url: str = self.__genr_api_url(url)
         return self.__request(api_url)
 
-    def get_exchange_by_id(self, id: str = "binance") -> list:
+    def get_exchange_by_id(self, id: str = "binance") -> dict:
         """Get exchange volume in BTC and top 100 tickers only"""
         url: str = f"/exchanges/{id}"
         api_url: str = self.__genr_api_url(url)
+        return self.__request(api_url)
+
+    def get_exchange_tickers_by_id(self, id: str = "binance", *, coin_ids: str,
+                                   include_exchange_logo: bool = True, page: int = 1,
+                                   depth: bool = False,
+                                   order: str = "trust_score_desc") -> dict:
+        """Get exchange tickers (paginated, 100 tickers per page)"""
+        url: str = f"/exchanges/{id}/tickers"
+        parameters: dict = {"coin_ids": coin_ids,
+                            "include_exchange_logo": include_exchange_logo,
+                            "page": page, "depth": depth, "order": order}
+        api_url: str = self.__genr_api_url(url, parameters)
         return self.__request(api_url)
