@@ -263,3 +263,8 @@ class CoinGeckoAPI:
         parameters: dict = {"per_page": per_page, "page": page}
         api_url: str = self.__genr_api_url(url, parameters)
         return self.__request(api_url)
+
+    def get_indexes_by_market_id_and_index_id(self, market_id: str, id: str):
+        url: str = f"/indexes/{market_id}/{id}"
+        api_url: str = self.__genr_api_url(url)
+        return self.__request(api_url)
