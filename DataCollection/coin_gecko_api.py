@@ -269,9 +269,16 @@ class CoinGeckoAPI:
         url: str = f"/indexes/{market_id}/{id}"
         api_url: str = self.__genr_api_url(url)
         return self.__request(api_url)
-    
+
     def get_indexes_list(self) -> list:
         """list market indexes id and name"""
         url: str = f"/indexes/list"
+        api_url: str = self.__genr_api_url(url)
+        return self.__request(api_url)
+
+    def get_derivatives(self, *, include_tickers: str = "all") -> list:
+        """List all derivative tickers"""
+        url: str = f"/derivatives"
+        parameters: dict = {"include_tickers": include_tickers}
         api_url: str = self.__genr_api_url(url)
         return self.__request(api_url)
