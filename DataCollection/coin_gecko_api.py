@@ -328,3 +328,9 @@ class CoinGeckoAPI:
         url: str = f"/global"
         api_url: str = self.__genr_api_url(url)
         return self.__request(api_url)
+
+    def get_global_decentralized_finance_defi(self) -> dict:
+        """Get cryptocurrency global decentralized finance(defi) data"""
+        url: str = f"/global/decentralized_finance_defi"
+        api_url: str = self.__genr_api_url(url)
+        return self.__request(api_url)
