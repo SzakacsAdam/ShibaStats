@@ -169,8 +169,20 @@ class CoinGeckoAPI:
         api_url: str = self.__genr_api_url(url, parameters)
         return self.__request(api_url)
 
-    def get_coin_info_from_contract_address_by_id(self, id: str, contract_adrress: str):
+    def get_coin_info_from_contract_address_by_id(self, id: str,
+                                                  contract_address: str) -> dict:
         """Get coin info from contract address"""
-        url: str = f"/coins/{id}/contract/{contract_adrress}"
+        url: str = f"/coins/{id}/contract/{contract_address}"
         api_url: str = self.__genr_api_url(url)
+        return self.__request(api_url)
+
+    def get_coin_market_chart_from_contract_address_by_id(self,  id: str,
+                                                          contract_address: str,
+                                                          vs_currency: str,
+                                                          days: str = "max") -> dict:
+        """Get historical market data include price, market cap, and 24h volume 
+           (granularity auto) from a contract address"""
+        url: str = f"/coins/{id}/contract/{contract_address}/market_chart"
+        parameters: dict = {"vs_currency": vs_currency, "days": days}
+        api_url: str = self.__genr_api_url(url, parameters)
         return self.__request(api_url)
