@@ -225,3 +225,9 @@ class CoinGeckoAPI:
         parameters: dict = {"per_page": per_page, "page": page}
         api_url: str = self.__genr_api_url(url, parameters)
         return self.__request(api_url)
+
+    def get_all_exchanges_by_id_name_list(self) -> list:
+        """List all supported markets id and name (no pagination required)"""
+        url: str = "/exchanges/list"
+        api_url: str = self.__genr_api_url(url)
+        return self.__request(api_url)
