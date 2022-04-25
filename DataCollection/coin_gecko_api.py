@@ -98,7 +98,7 @@ class CoinGeckoAPI:
 
     def get_coins_markets(self, vs_currency, *, ids='', category='',
                           order: str = 'market_cap_desc', per_page: int = 100,
-                          page: int = 1, sparkline: bool = False, 
+                          page: int = 1, sparkline: bool = False,
                           price_change_percentage='') -> list:
         """List all supported coins price, market cap, volume, 
            and market related data."""
@@ -123,13 +123,18 @@ class CoinGeckoAPI:
         return self.__request(api_url)
 
     def get_coin_by_id_tickers(self, id: str, *, exchange_ids='', include_exchange_logo='',
-                               page: int = 1, order: str = "trust_score_asc", 
+                               page: int = 1, order: str = "trust_score_asc",
                                depth: bool = False):
         url: str = f"/coins/{id}/tickers"
-        parameters: dict = {"exchange_ids": exchange_ids, 
+        parameters: dict = {"exchange_ids": exchange_ids,
                             "include_exchange_logo": include_exchange_logo,
                             "page": page, "order": order,
                             "depth": depth}
         api_url: str = self.__genr_api_url(url, parameters)
         return self.__request(api_url)
 
+    def get_coin_history(self, id: str, date: str = "01-01-2022", *, localization=False):
+        url: str = f"/coins/{id}/history"
+        parameters: dict = {"date": date, "localization": localization}
+        api_url: str = self.__genr_api_url(url, parameters)
+        return self.__request(api_url)
