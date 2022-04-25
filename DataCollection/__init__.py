@@ -1,1 +1,1 @@
-from DataCollection.data_collection import DataCollector
+from DataCollection.coin_gecko_api import CoinGeckoAPI
