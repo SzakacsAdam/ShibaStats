@@ -218,10 +218,10 @@ class CoinGeckoAPI:
         parameters: dict = {"order": order}
         api_url: str = self.__genr_api_url(url, parameters)
         return self.__request(api_url)
-    
-    def get_all_exhanges(self, *, per_page:int=100, page:int=1) -> list:
+
+    def get_all_exchanges_list(self, *, per_page: int = 100, page: int = 1) -> list:
         """List all exchanges"""
         url: str = "/exchanges"
-        parameters: dict = {"per_page": per_page, "page":page}
+        parameters: dict = {"per_page": per_page, "page": page}
         api_url: str = self.__genr_api_url(url, parameters)
         return self.__request(api_url)
