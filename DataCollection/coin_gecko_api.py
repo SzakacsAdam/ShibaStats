@@ -291,22 +291,28 @@ class CoinGeckoAPI:
         api_url: str = self.__genr_api_url(url, parameters)
         return self.__request(api_url)
 
-    def get_derivatives_exchanges_by_id(self, id: str, *, 
+    def get_derivatives_exchanges_by_id(self, id: str, *,
                                         include_tickers: str = "all") -> list:
         """show derivative exchange data"""
         url: str = f"/derivatives/exchanges/{id}"
         parameters: dict = {"include_tickers": include_tickers}
         api_url: str = self.__genr_api_url(url, parameters)
         return self.__request(api_url)
-    
+
     def get_derivatives_list(self, *, include_tickers: str = "all") -> list:
         """List all derivative exchanges name and identifier"""
         url: str = f"/derivatives/exchanges/list"
         api_url: str = self.__genr_api_url(url)
         return self.__request(api_url)
-    
+
     def get_exchange_rates(self) -> dict:
         """Get BTC-to-Currency exchange rates"""
         url: str = f"/exchange_rates"
+        api_url: str = self.__genr_api_url(url)
+        return self.__request(api_url)
+
+    def search(self, query: str) -> dict:
+        """Search for coins, categories and markets on CoinGecko"""
+        url: str = f"/exchange_rates?{query}"
         api_url: str = self.__genr_api_url(url)
         return self.__request(api_url)
