@@ -98,7 +98,8 @@ class CoinGeckoAPI:
 
     def get_coins_markets(self, vs_currency, *, ids='', category='',
                           order: str = 'market_cap_desc', per_page: int = 100,
-                          page: int = 1, sparkline: bool = False, price_change_percentage='') -> list:
+                          page: int = 1, sparkline: bool = False, 
+                          price_change_percentage='') -> list:
         """List all supported coins price, market cap, volume, 
            and market related data."""
         url: str = "/coins/markets"
@@ -111,7 +112,7 @@ class CoinGeckoAPI:
 
     def get_coin_by_id(self, id: str, *, localization: bool = True, tickers: bool = True,
                        market_data: bool = True, community_data: bool = True,
-                       developer_data: bool = True, sparkline: bool = True):
+                       developer_data: bool = True, sparkline: bool = True) -> dict:
         """Get current data (name, price, market, ... including exchange tickers) 
            for a coin"""
         url: str = f"/coins/{id}"
@@ -120,3 +121,15 @@ class CoinGeckoAPI:
                             "developer_data": developer_data, "sparkline": sparkline}
         api_url: str = self.__genr_api_url(url, parameters)
         return self.__request(api_url)
+
+    def get_coin_by_id_tickers(self, id: str, *, exchange_ids='', include_exchange_logo='',
+                               page: int = 1, order: str = "trust_score_asc", 
+                               depth: bool = False):
+        url: str = f"/coins/{id}/tickers"
+        parameters: dict = {"exchange_ids": exchange_ids, 
+                            "include_exchange_logo": include_exchange_logo,
+                            "page": page, "order": order,
+                            "depth": depth}
+        api_url: str = self.__genr_api_url(url, parameters)
+        return self.__request(api_url)
+
