@@ -290,3 +290,11 @@ class CoinGeckoAPI:
         parameters: dict = {"order": order, "per_page": per_page, "page": page}
         api_url: str = self.__genr_api_url(url, parameters)
         return self.__request(api_url)
+
+    def get_derivatives_exchanges_by_id(self, id: str, *, 
+                                        include_tickers: str = "all") -> list:
+        """show derivative exchange data"""
+        url: str = f"/derivatives/exchanges/{id}"
+        parameters: dict = {"include_tickers": include_tickers}
+        api_url: str = self.__genr_api_url(url, parameters)
+        return self.__request(api_url)
