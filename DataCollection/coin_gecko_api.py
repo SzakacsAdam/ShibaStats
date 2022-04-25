@@ -231,3 +231,9 @@ class CoinGeckoAPI:
         url: str = "/exchanges/list"
         api_url: str = self.__genr_api_url(url)
         return self.__request(api_url)
+
+    def get_exchange_by_id(self, id: str = "binance") -> list:
+        """Get exchange volume in BTC and top 100 tickers only"""
+        url: str = f"/exchanges/{id}"
+        api_url: str = self.__genr_api_url(url)
+        return self.__request(api_url)
