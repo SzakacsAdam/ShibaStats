@@ -83,9 +83,11 @@ class CoinGeckoAPI:
         api_url: str = self.__genr_api_url(url)
         return self.__request(api_url)
 
-    def get_coins(self, *, include_platform: bool = False) -> list:
+    def get_coins_list(self, *, include_platform: bool = False) -> list:
         """List all supported coins id, name and symbol (no pagination required)"""
         url: str = "/coins/list"
         parameters: dict = {"include_platform": include_platform}
         api_url: str = self.__genr_api_url(url, parameters)
         return self.__request(api_url)
+    
+    def get
