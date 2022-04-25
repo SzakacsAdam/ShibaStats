@@ -304,3 +304,9 @@ class CoinGeckoAPI:
         url: str = f"/derivatives/exchanges/list"
         api_url: str = self.__genr_api_url(url)
         return self.__request(api_url)
+    
+    def get_exchange_rates(self) -> dict:
+        """Get BTC-to-Currency exchange rates"""
+        url: str = f"/exchange_rates"
+        api_url: str = self.__genr_api_url(url)
+        return self.__request(api_url)
