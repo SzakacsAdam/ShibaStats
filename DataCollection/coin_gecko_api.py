@@ -150,3 +150,14 @@ class CoinGeckoAPI:
                             "interval": interval}
         api_url: str = self.__genr_api_url(url, parameters)
         return self.__request(api_url)
+
+    def get_coin_market_chart_range(self, id: str, vs_currency,
+                                    from_timestamp: str,
+                                    to_timestamp: str) -> dict:
+        """Get historical market data include price, market cap, and 24h volume 
+           within a range of timestamp (granularity auto)"""
+        url: str = f"/coins/{id}/market_chart/range"
+        parameters: dict = {"vs_currency": vs_currency, "from": from_timestamp,
+                            "to": to_timestamp}
+        api_url: str = self.__genr_api_url(url, parameters)
+        return self.__request(api_url)
