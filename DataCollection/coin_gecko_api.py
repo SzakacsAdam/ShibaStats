@@ -76,3 +76,9 @@ class CoinGeckoAPI:
                             "include_last_updated_at": include_last_updated_at}
         api_url: str = self.__genr_api_url(url, parameters)
         return self.__request(api_url)
+
+    def get_supported_vs_currencies(self) -> list:
+        """Get list of supported_vs_currencies."""
+        url: str = "/simple/supported_vs_currencies"
+        api_url: str = self.__genr_api_url(url)
+        return self.__request(api_url)
