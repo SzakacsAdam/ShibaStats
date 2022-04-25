@@ -39,3 +39,9 @@ class CoinGeckoAPI:
                            for key, val in parameters.items()]
             api_url += '&'.join(parms).lower()
         return api_url
+
+    def ping(self) -> dict:
+        """Check API server status"""
+        url: str = "/ping"
+        api_url: str = self.__genr_api_url(url)
+        return self.__request(api_url)
