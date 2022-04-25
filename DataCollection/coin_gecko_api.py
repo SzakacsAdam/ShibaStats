@@ -206,8 +206,15 @@ class CoinGeckoAPI:
         api_url: str = self.__genr_api_url(url)
         return self.__request(api_url)
 
-    def get_all_categories(self) -> list:
+    def get_all_categories_list(self) -> list:
         """List all categories"""
         url: str = "/coins/categories/list"
         api_url: str = self.__genr_api_url(url)
+        return self.__request(api_url)
+
+    def get_all_categories(self, order: str = "market_cap_desc") -> list:
+        """List all categories"""
+        url: str = "/coins/categories"
+        parameters: dict = {"order": order}
+        api_url: str = self.__genr_api_url(url, parameters)
         return self.__request(api_url)
