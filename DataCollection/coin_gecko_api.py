@@ -124,7 +124,8 @@ class CoinGeckoAPI:
 
     def get_coin_by_id_tickers(self, id: str, *, exchange_ids='', include_exchange_logo='',
                                page: int = 1, order: str = "trust_score_asc",
-                               depth: bool = False):
+                               depth: bool = False) -> dict:
+        """Get coin tickers (paginated to 100 items)"""
         url: str = f"/coins/{id}/tickers"
         parameters: dict = {"exchange_ids": exchange_ids,
                             "include_exchange_logo": include_exchange_logo,
@@ -133,7 +134,9 @@ class CoinGeckoAPI:
         api_url: str = self.__genr_api_url(url, parameters)
         return self.__request(api_url)
 
-    def get_coin_history(self, id: str, date: str = "01-01-2022", *, localization=False):
+    def get_coin_history(self, id: str, date: str = "01-01-2022", *,
+                         localization=False) -> dict:
+        """Get historical data (name, price, market, stats) at a given date for a coin"""
         url: str = f"/coins/{id}/history"
         parameters: dict = {"date": date, "localization": localization}
         api_url: str = self.__genr_api_url(url, parameters)
