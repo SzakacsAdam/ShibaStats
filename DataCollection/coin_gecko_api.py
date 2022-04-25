@@ -59,3 +59,20 @@ class CoinGeckoAPI:
                             "include_last_updated_at": include_last_updated_at}
         api_url: str = self.__genr_api_url(url, parameters)
         return self.__request(api_url)
+
+    def get_token_price(self, id: str, contract_addresses, vs_currencies, *,
+                        include_market_cap: bool = False,
+                        include_24hr_vol: bool = False,
+                        include_24hr_change: bool = False,
+                        include_last_updated_at: bool = False) -> dict:
+        """Get current price of tokens (using contract addresses) for a given 
+           platform in any other currency that you need."""
+        url: str = f"/simple/token_price/{id}"
+        parameters: dict = {"contract_addresses": contract_addresses,
+                            "vs_currencies": vs_currencies,
+                            "include_market_cap": include_market_cap,
+                            "include_24hr_vol": include_24hr_vol,
+                            "include_24hr_change": include_24hr_change,
+                            "include_last_updated_at": include_last_updated_at}
+        api_url: str = self.__genr_api_url(url, parameters)
+        return self.__request(api_url)
