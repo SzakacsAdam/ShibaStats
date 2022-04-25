@@ -45,3 +45,17 @@ class CoinGeckoAPI:
         url: str = "/ping"
         api_url: str = self.__genr_api_url(url)
         return self.__request(api_url)
+
+    def get_price(self, ids, vs_currencies, *, include_market_cap: bool = False,
+                  include_24hr_vol: bool = False, include_24hr_change: bool = False,
+                  include_last_updated_at: bool = False) -> dict:
+        """Get the current price of any cryptocurrencies in any other supported 
+        currencies that you need."""
+        url: str = "/simple/price"
+        parameters: dict = {"ids": ids, "vs_currencies": vs_currencies,
+                            "include_market_cap": include_market_cap,
+                            "include_24hr_vol": include_24hr_vol,
+                            "include_24hr_change": include_24hr_change,
+                            "include_last_updated_at": include_last_updated_at}
+        api_url: str = self.__genr_api_url(url, parameters)
+        return self.__request(api_url)
