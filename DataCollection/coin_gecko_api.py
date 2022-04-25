@@ -170,6 +170,7 @@ class CoinGeckoAPI:
         return self.__request(api_url)
 
     def get_coin_info_from_contract_address_by_id(self, id: str, contract_adrress: str):
+        """Get coin info from contract address"""
         url: str = f"/coins/{id}/contract/{contract_adrress}"
         api_url: str = self.__genr_api_url(url)
         return self.__request(api_url)
