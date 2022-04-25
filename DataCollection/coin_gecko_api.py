@@ -313,6 +313,12 @@ class CoinGeckoAPI:
 
     def search(self, query: str) -> dict:
         """Search for coins, categories and markets on CoinGecko"""
-        url: str = f"/exchange_rates?{query}"
+        url: str = f"/search?{query}"
+        api_url: str = self.__genr_api_url(url)
+        return self.__request(api_url)
+
+    def get_trending(self) -> dict:
+        """Get trending search coins (Top-7) on CoinGecko in the last 24 hours"""
+        url: str = f"/search/trending"
         api_url: str = self.__genr_api_url(url)
         return self.__request(api_url)
