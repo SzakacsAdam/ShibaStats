@@ -176,7 +176,7 @@ class CoinGeckoAPI:
         api_url: str = self.__genr_api_url(url)
         return self.__request(api_url)
 
-    def get_coin_market_chart_from_contract_address_by_id(self,  id: str,
+    def get_coin_market_chart_from_contract_address_by_id(self, id: str,
                                                           contract_address: str,
                                                           vs_currency: str,
                                                           days: str = "max") -> dict:
@@ -184,5 +184,18 @@ class CoinGeckoAPI:
            (granularity auto) from a contract address"""
         url: str = f"/coins/{id}/contract/{contract_address}/market_chart"
         parameters: dict = {"vs_currency": vs_currency, "days": days}
+        api_url: str = self.__genr_api_url(url, parameters)
+        return self.__request(api_url)
+
+    def get_coin_market_chart_range_from_contract_address_by_id(self, id: str,
+                                                                contract_address: str,
+                                                                vs_currency: str,
+                                                                from_timestamp: str,
+                                                                to_timestamp: str) -> dict:
+        """Get historical market data include price, market cap, and 24h volume 
+        within a range of timestamp (granularity auto) from a contract address"""
+        url: str = f"/coins/{id}/contract/{contract_address}/market_chart/range"
+        parameters: dict = {"vs_currency": vs_currency, "from": from_timestamp,
+                            "to": to_timestamp}
         api_url: str = self.__genr_api_url(url, parameters)
         return self.__request(api_url)
