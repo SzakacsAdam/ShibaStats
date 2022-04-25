@@ -36,6 +36,7 @@ class CoinGeckoAPI:
             api_url += '?'
             parms: list = [f"{key}={','.join(val)}" if isinstance(val, list)
                            else f"{key}={val}"
+                           if val else ''
                            for key, val in parameters.items()]
             api_url += '&'.join(parms).lower()
         return api_url
@@ -89,5 +90,16 @@ class CoinGeckoAPI:
         parameters: dict = {"include_platform": include_platform}
         api_url: str = self.__genr_api_url(url, parameters)
         return self.__request(api_url)
-    
-    def get
+
+    def get_coins_markets(self, vs_currency, *, ids='', category='',
+                          order: str = 'market_cap_desc', per_page: int = 100,
+                          page: int = 1, sparkline: bool = False, price_change_percentage=''):
+        """List all supported coins price, market cap, volume, 
+           and market related data."""
+        url: str = "/coins/markets"
+        parameters: dict = {"vs_currency": vs_currency, "ids": ids,
+                            "category": category, "order": order,
+                            "per_page": per_page, "page": page, "sparkline": sparkline,
+                            "price_change_percentage": price_change_percentage}
+        api_url: str = self.__genr_api_url(url, parameters)
+        return self.__request(api_url)
