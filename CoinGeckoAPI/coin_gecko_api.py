@@ -41,12 +41,14 @@ class CoinGeckoAPI:
             api_url += '&'.join(parms).lower()
         return api_url
 
+    #----- PING -----#
     def ping(self) -> dict:
         """Check API server status"""
         url: str = "/ping"
         api_url: str = self.__genr_api_url(url)
         return self.__request(api_url)
 
+    #----- SIMPLE -----#
     def get_price(self, ids, vs_currencies, *, include_market_cap: bool = False,
                   include_24hr_vol: bool = False, include_24hr_change: bool = False,
                   include_last_updated_at: bool = False) -> dict:
@@ -84,7 +86,9 @@ class CoinGeckoAPI:
         api_url: str = self.__genr_api_url(url)
         return self.__request(api_url)
 
-    def get_coins(self):
+    #----- COINS -----#
+    def get_coins(self) -> list:
+        """List all coins with data"""
         url: str = "/coins"
         api_url: str = self.__genr_api_url(url)
         return self.__request(api_url)
@@ -169,6 +173,7 @@ class CoinGeckoAPI:
         api_url: str = self.__genr_api_url(url, parameters)
         return self.__request(api_url)
 
+    #----- CONTRACT -----#
     def get_coin_info_from_contract_address_by_id(self, id: str,
                                                   contract_address: str) -> dict:
         """Get coin info from contract address"""
@@ -200,12 +205,14 @@ class CoinGeckoAPI:
         api_url: str = self.__genr_api_url(url, parameters)
         return self.__request(api_url)
 
+    #----- ASSET_PLATFORMS -----#
     def get_asset_platforms(self) -> list:
         """List all asset platforms (Blockchain networks)"""
         url: str = "/asset_platforms"
         api_url: str = self.__genr_api_url(url)
         return self.__request(api_url)
 
+    #----- CATEGORIES -----#
     def get_all_categories_list(self) -> list:
         """List all categories"""
         url: str = "/coins/categories/list"
@@ -219,6 +226,7 @@ class CoinGeckoAPI:
         api_url: str = self.__genr_api_url(url, parameters)
         return self.__request(api_url)
 
+    #----- EXCHANGES -----#
     def get_all_exchanges_list(self, *, per_page: int = 100, page: int = 1) -> list:
         """List all exchanges"""
         url: str = "/exchanges"
@@ -257,6 +265,7 @@ class CoinGeckoAPI:
         api_url: str = self.__genr_api_url(url, parameters)
         return self.__request(api_url)
 
+    #----- INDEXES -----#
     def get_indexes(self, *, per_page: int = 100, page: int = 1) -> list:
         """List all market indexes"""
         url: str = f"/indexes"
@@ -264,7 +273,7 @@ class CoinGeckoAPI:
         api_url: str = self.__genr_api_url(url, parameters)
         return self.__request(api_url)
 
-    def get_indexes_by_market_id_and_index_id(self, market_id: str, id: str):
+    def get_indexes_by_market_id_and_index_id(self, market_id: str, id: str) -> list:
         """get market index by market id and index id"""
         url: str = f"/indexes/{market_id}/{id}"
         api_url: str = self.__genr_api_url(url)
@@ -276,6 +285,7 @@ class CoinGeckoAPI:
         api_url: str = self.__genr_api_url(url)
         return self.__request(api_url)
 
+    #----- DERIVATIVES -----#
     def get_derivatives(self, *, include_tickers: str = "all") -> list:
         """List all derivative tickers"""
         url: str = f"/derivatives"
@@ -305,24 +315,28 @@ class CoinGeckoAPI:
         api_url: str = self.__genr_api_url(url)
         return self.__request(api_url)
 
+    #----- EXCHANGE_RATES -----#
     def get_exchange_rates(self) -> dict:
         """Get BTC-to-Currency exchange rates"""
         url: str = f"/exchange_rates"
         api_url: str = self.__genr_api_url(url)
         return self.__request(api_url)
 
+    #----- SEARCH -----#
     def search(self, query: str) -> dict:
         """Search for coins, categories and markets on CoinGecko"""
         url: str = f"/search?{query}"
         api_url: str = self.__genr_api_url(url)
         return self.__request(api_url)
 
+    #----- TRENDING -----#
     def get_trending(self) -> dict:
         """Get trending search coins (Top-7) on CoinGecko in the last 24 hours"""
         url: str = f"/search/trending"
         api_url: str = self.__genr_api_url(url)
         return self.__request(api_url)
 
+    #----- GLOBAL -----#
     def get_global(self) -> dict:
         """Get cryptocurrency global data"""
         url: str = f"/global"
