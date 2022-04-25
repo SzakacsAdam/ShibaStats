@@ -322,3 +322,9 @@ class CoinGeckoAPI:
         url: str = f"/search/trending"
         api_url: str = self.__genr_api_url(url)
         return self.__request(api_url)
+
+    def get_global(self) -> dict:
+        """Get cryptocurrency global data"""
+        url: str = f"/global"
+        api_url: str = self.__genr_api_url(url)
+        return self.__request(api_url)
