@@ -199,3 +199,9 @@ class CoinGeckoAPI:
                             "to": to_timestamp}
         api_url: str = self.__genr_api_url(url, parameters)
         return self.__request(api_url)
+    
+    def get_asset_platforms(self) -> dict:
+        """List all asset platforms (Blockchain networks)"""
+        url: str = "/asset_platforms"
+        api_url: str = self.__genr_api_url(url)
+        return self.__request(api_url)
