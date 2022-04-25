@@ -280,5 +280,13 @@ class CoinGeckoAPI:
         """List all derivative tickers"""
         url: str = f"/derivatives"
         parameters: dict = {"include_tickers": include_tickers}
-        api_url: str = self.__genr_api_url(url)
+        api_url: str = self.__genr_api_url(url, parameters)
+        return self.__request(api_url)
+
+    def get_derivatives_exchanges(self, *, order: str = "name_asc",
+                                  per_page: int = 100, page: int = 1) -> list:
+        """List all derivative exchanges"""
+        url: str = f"/derivatives/exchanges"
+        parameters: dict = {"order": order, "per_page": per_page, "page": page}
+        api_url: str = self.__genr_api_url(url, parameters)
         return self.__request(api_url)
