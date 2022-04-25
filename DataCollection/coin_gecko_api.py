@@ -249,3 +249,10 @@ class CoinGeckoAPI:
                             "page": page, "depth": depth, "order": order}
         api_url: str = self.__genr_api_url(url, parameters)
         return self.__request(api_url)
+
+    def get_exchange_volume_chart_by_id(self, id: str = "binance", days: int = 1) -> list:
+        """Get volume_chart data for a given exchange"""
+        url: str = f"/exchanges/{id}/volume_chart"
+        parameters: dict = {"id": id, "days": days}
+        api_url: str = self.__genr_api_url(url, parameters)
+        return self.__request(api_url)
