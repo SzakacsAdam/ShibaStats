@@ -84,6 +84,11 @@ class CoinGeckoAPI:
         api_url: str = self.__genr_api_url(url)
         return self.__request(api_url)
 
+    def get_coins(self):
+        url: str = "/coins"
+        api_url: str = self.__genr_api_url(url)
+        return self.__request(api_url)
+
     def get_coins_list(self, *, include_platform: bool = False) -> list:
         """List all supported coins id, name and symbol (no pagination required)"""
         url: str = "/coins/list"
@@ -93,7 +98,7 @@ class CoinGeckoAPI:
 
     def get_coins_markets(self, vs_currency, *, ids='', category='',
                           order: str = 'market_cap_desc', per_page: int = 100,
-                          page: int = 1, sparkline: bool = False, price_change_percentage=''):
+                          page: int = 1, sparkline: bool = False, price_change_percentage='') -> list:
         """List all supported coins price, market cap, volume, 
            and market related data."""
         url: str = "/coins/markets"
@@ -101,5 +106,17 @@ class CoinGeckoAPI:
                             "category": category, "order": order,
                             "per_page": per_page, "page": page, "sparkline": sparkline,
                             "price_change_percentage": price_change_percentage}
+        api_url: str = self.__genr_api_url(url, parameters)
+        return self.__request(api_url)
+
+    def get_coin_by_id(self, id: str, *, localization: bool = True, tickers: bool = True,
+                       market_data: bool = True, community_data: bool = True,
+                       developer_data: bool = True, sparkline: bool = True):
+        """Get current data (name, price, market, ... including exchange tickers) 
+           for a coin"""
+        url: str = f"/coins/{id}"
+        parameters: dict = {"localization": localization, "tickers": tickers,
+                            "market_data": market_data, "community_data": community_data,
+                            "developer_data": developer_data, "sparkline": sparkline}
         api_url: str = self.__genr_api_url(url, parameters)
         return self.__request(api_url)
