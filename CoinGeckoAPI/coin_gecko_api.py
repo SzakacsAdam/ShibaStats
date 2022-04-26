@@ -31,13 +31,13 @@ class CoinGeckoAPI:
             return loads(response.content.decode('utf-8'))
 
     def __genr_api_url(self, url: str, parameters: dict = None):
-        api_url = f"{self.__API_URL_BASE}{url}"
+        api_url = f"{self.api_base_url}{url}"
         if parameters:
             api_url += '?'
             parms: list = [f"{key}={','.join(val)}" if isinstance(val, list)
                            else f"{key}={val}"
-                           if val else ''
-                           for key, val in parameters.items()]
+                           for key, val in parameters.items()
+                           if val]
             api_url += '&'.join(parms).lower()
         return api_url
 
